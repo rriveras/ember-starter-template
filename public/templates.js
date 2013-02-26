@@ -1,0 +1,1 @@
+Ember.TEMPLATES['application']=Ember.Handlebars.compile("<h1>HOLA!!!</h1>");

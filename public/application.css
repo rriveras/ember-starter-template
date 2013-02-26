@@ -1,0 +1,16 @@
+/* line 2, /Users/rriveras/Code/projects/ludicash/client/assets/stylesheets/neat/grid/_grid.scss */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 4, /Users/rriveras/Code/projects/ludicash/client/assets/stylesheets/base.scss */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 8, /Users/rriveras/Code/projects/ludicash/client/assets/stylesheets/base.scss */
+h1 {
+  font-size: 22.652px;
+}
