@@ -426,3 +426,20 @@ h1, p {
 h1 {
   font-size: 22.652px;
 }
+
+/* line 19, /Users/rriveras/Code/projects/ludicash/client/assets/stylesheets/base.scss */
+.container {
+  *zoom: 1;
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 18, /Users/rriveras/Code/projects/ludicash/client/assets/stylesheets/bourbon/addons/_clearfix.scss */
+.container:before, .container:after {
+  content: " ";
+  display: table;
+}
+/* line 23, /Users/rriveras/Code/projects/ludicash/client/assets/stylesheets/bourbon/addons/_clearfix.scss */
+.container:after {
+  clear: both;
+}

@@ -38632,7 +38632,10 @@ Ember
 */
 
 })();
-minispade.register('main', function() {App = Ember.Application.create();
+minispade.register('main', function() {App = Ember.Application.create({
+	version: '0.1.1',
+	rootElement: '#application-wrap'
+});
 
 App.ApplicationView = Ember.View.extend({
   templateName: 'application'

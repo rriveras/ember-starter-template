@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Ludicash - Client</title>
-  <link rel="stylesheet" href="/application.css">
+	<meta charset="utf-8">
+	<title>Ludicash - Client</title>
+	<link rel="stylesheet" href="/application.css">
 </head>
 <body>
+
+	<header>
+		<div class="container">
+			<h1>Header</h1>
+		</div>
+	</header>
+
+	<div class="container">
+		<div id="application-wrap"></div>
+	</div>
+	
+	<footer>
+		<div class="container">
+			<p>Footer</p>
+		</div>
+	</footer>
+	
+
 	<script src="/minispade.js"></script>
-  <script src="/application.js"></script>
-  <script src="/templates.js"></script>
-  <script>minispade.requireAll()</script>
-  <script type="text/x-handlebars-template">
-  	{{ outlet }}
+	<script src="/application.js"></script>
+	<script src="/templates.js"></script>
+	<script>minispade.requireAll()</script>
+	<script type="text/x-handlebars-template">
+		{{ outlet }}
 	</script>
 </body>
 </html>
