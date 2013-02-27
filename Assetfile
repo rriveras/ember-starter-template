@@ -16,7 +16,7 @@ input "assets/javascripts" do
   #  coffee_script
   #end
 
-  match "app/**/*.hbs" do
+  match "app/templates/**/*.hbs" do
     handlebars
     concat "templates.js"
   end
