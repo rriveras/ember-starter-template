@@ -3,29 +3,29 @@ require 'rake-pipeline-web-filters'
 require "rake-pipeline-web-filters/helpers"
 require "rake-pipeline-web-filters/neuter_filter"
 
-output "public"
-
 class Rake::Pipeline::DSL::PipelineDSL
   def production?
     ENV['RAKEP_MODE'] == 'production'
   end
 end
 
+output "public"
+
 input "assets/javascripts" do
+
   #match "app/**/*.coffee" do
   #  coffee_script
   #end
 
   match "app/templates/**/*.hbs" do
     handlebars
-    concat "templates.js"
+    concat "application.js"
   end
 
   match "app/**/*.js" do
     minispade :rewrite_requires => true, :module_id_generator => proc { |input|
         input.path.sub(/^app\//, '').sub(/\.js$/, '')
     }
-    uglify if production?
     concat "application.js"
   end
 
@@ -35,6 +35,7 @@ input "assets/javascripts" do
       vendor/jquery.js
       vendor/handlebars.js
       vendor/ember.js
+      vendor/minispade.js
     ], "application.js"
   end
 end

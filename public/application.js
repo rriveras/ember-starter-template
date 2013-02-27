@@ -38632,27 +38632,97 @@ Ember
 */
 
 })();
-minispade.register('main', function() {App = Ember.Application.create({
+/*jshint evil:true*/
+
+if (typeof document !== "undefined") {
+  (function() {
+    minispade = {
+      root: null,
+      modules: {},
+      loaded: {},
+
+      globalEval: function(data) {
+        if ( data ) {
+          // We use execScript on Internet Explorer
+          // We use an anonymous function so that context is window
+          // rather than jQuery in Firefox
+          ( window.execScript || function( data ) {
+            window[ "eval" ].call( window, data );
+          } )( data );
+        }
+      },
+
+      requireModule: function(name) {
+        var loaded = minispade.loaded[name];
+        var mod = minispade.modules[name];
+
+        if (!loaded) {
+          if (mod) {
+            minispade.loaded[name] = true;
+
+            if (typeof mod === "string") {
+              this.globalEval(mod);
+            } else {
+              mod();
+            }
+          } else {
+            if (minispade.root && name.substr(0,minispade.root.length) !== minispade.root) {
+              return minispade.requireModule(minispade.root+name);
+            } else {
+              throw "The module '" + name + "' could not be found";
+            }
+          }
+        }
+
+        return loaded;
+      },
+
+      requireAll: function(regex) {
+        for (var module in this.modules) {
+          if (!this.modules.hasOwnProperty(module)) { continue; }
+          if (regex && !regex.test(module)) { continue; }
+          minispade.requireModule(module);
+        }
+      },
+
+      require: function(path) {
+        if (typeof path === 'string') {
+          minispade.requireModule(path);
+        } else {
+          minispade.requireAll(path);
+        }
+      },
+
+      register: function(name, callback) {
+        minispade.modules[name] = callback;
+      }
+    };
+  })();
+}minispade.register('app', function() {App = Ember.Application.create({
 	version: '0.1.1',
 	rootElement: '#application-wrap'
 });
 
-App.ApplicationView = Ember.View.extend({
-  templateName: 'application'
-});
+//require('models');
+//require('views');
+//require('controllers/application_controller');
+//require('routes');
+minispade.require('test');
+test("holi!");
+});minispade.register('controllers/application_controller', function() {minispade.require("app");
+
 App.ApplicationController = Ember.Controller.extend();
-
-
-App.Router = Ember.Router.extend({
+});minispade.register('routes', function() {App.Router = Ember.Router.extend({
   root: Ember.Route.extend({
     index: Ember.Route.extend({
       route: '/'
     })
   })
 });
-minispade.require('test');
-test("holi!");
 });minispade.register('test', function() {window.test = function(arg){
 	console.log(arg);
 }
+});minispade.register('views/application_view', function() {App.ApplicationView = Ember.View.extend({
+  templateName: 'application'
 });
+});Ember.TEMPLATES['application']=Ember.Handlebars.compile("<h2>Hello world</h2>\n<p>\n\tHoodie godard umami kogi, messenger bag aesthetic marfa shoreditch twee ethnic. Biodiesel fanny pack sriracha vinyl, cliche cardigan butcher. Master cleanse brooklyn aesthetic deep v beard. Selfies godard banksy, bushwick VHS polaroid readymade semiotics. Keytar plaid ethnic disrupt before they sold out williamsburg, pop-up pour-over deep v kogi literally leggings VHS aesthetic. Post-ironic tattooed blue bottle lomo. Brooklyn shoreditch small batch pickled, twee truffaut banksy literally readymade direct trade ethical sriracha wayfarers.\n</p>");
