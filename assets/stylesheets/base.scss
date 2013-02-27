@@ -1,8 +1,15 @@
 @import "bourbon/bourbon";
 @import "neat/neat";
 
+@import "normalize";
+
 body {
 	font-family: $helvetica;
+	font-size: 14px;
+}
+
+h1, p {
+	margin:0 0 0.67em;
 }
 
 h1 {
