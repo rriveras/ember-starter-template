@@ -38713,11 +38713,11 @@ test("holi!");
 
 App.ApplicationController = Ember.Controller.extend();
 });minispade.register('routes', function() {App.Router = Ember.Router.extend({
-  root: Ember.Route.extend({
-    index: Ember.Route.extend({
-      route: '/'
-    })
-  })
+	location: 'history'
+})
+
+App.Router.map(function(){
+	this.resource('dashboard');
 });
 });minispade.register('test', function() {window.test = function(arg){
 	console.log(arg);
@@ -38725,4 +38725,4 @@ App.ApplicationController = Ember.Controller.extend();
 });minispade.register('views/application_view', function() {App.ApplicationView = Ember.View.extend({
   templateName: 'application'
 });
-});Ember.TEMPLATES['application']=Ember.Handlebars.compile("<h2>Hello world</h2>\n<p>\n\tHoodie godard umami kogi, messenger bag aesthetic marfa shoreditch twee ethnic. Biodiesel fanny pack sriracha vinyl, cliche cardigan butcher. Master cleanse brooklyn aesthetic deep v beard. Selfies godard banksy, bushwick VHS polaroid readymade semiotics. Keytar plaid ethnic disrupt before they sold out williamsburg, pop-up pour-over deep v kogi literally leggings VHS aesthetic. Post-ironic tattooed blue bottle lomo. Brooklyn shoreditch small batch pickled, twee truffaut banksy literally readymade direct trade ethical sriracha wayfarers.\n</p>");
+});Ember.TEMPLATES['application']=Ember.Handlebars.compile("");Ember.TEMPLATES['dashboard']=Ember.Handlebars.compile("<h1>Dashboard</h1>");Ember.TEMPLATES['index']=Ember.Handlebars.compile("<h2>Hello world from Index!!!</h2>\n<h2>{{#linkTo \"dashboard\"}}Dashboard{{/linkTo}}</h2>\n<p>\n\tHoodie godard umami kogi, messenger bag aesthetic marfa shoreditch twee ethnic. Biodiesel fanny pack sriracha vinyl, cliche cardigan butcher. Master cleanse brooklyn aesthetic deep v beard. Selfies godard banksy, bushwick VHS polaroid readymade semiotics. Keytar plaid ethnic disrupt before they sold out williamsburg, pop-up pour-over deep v kogi literally leggings VHS aesthetic. Post-ironic tattooed blue bottle lomo. Brooklyn shoreditch small batch pickled, twee truffaut banksy literally readymade direct trade ethical sriracha wayfarers.\n</p>");
