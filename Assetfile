@@ -10,6 +10,8 @@ class Rake::Pipeline::DSL::PipelineDSL
   end
 end
 
+# All of our outputs will be relative to the `public/`
+# directory.
 output "public"
 
 input "assets/javascripts" do

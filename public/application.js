@@ -46573,10 +46573,16 @@ DS.RESTAdapter = DS.Adapter.extend({
 })();
 
 
+});minispade.register('templates/about', function() {Ember.TEMPLATES['about']=Ember.Handlebars.compile("<h1>About. A cool static view!</h1>\n\n<p>\n\tJust testing that all dependencies load, and the routes are working right!\n</p>");
 });minispade.register('templates/application', function() {Ember.TEMPLATES['application']=Ember.Handlebars.compile("");
-});minispade.register('templates/dashboard', function() {Ember.TEMPLATES['dashboard']=Ember.Handlebars.compile("<h1>Dashboard</h1>");
-});minispade.register('templates/index', function() {Ember.TEMPLATES['index']=Ember.Handlebars.compile("<h2>Hello world from Index!!!</h2>\n<h2>{{#linkTo \"dashboard\"}}Dashboard{{/linkTo}}</h2>\n<p>\n\tHoodie godard umami kogi, messenger bag aesthetic marfa shoreditch twee ethnic. Biodiesel fanny pack sriracha vinyl, cliche cardigan butcher. Master cleanse brooklyn aesthetic deep v beard. Selfies godard banksy, bushwick VHS polaroid readymade semiotics. Keytar plaid ethnic disrupt before they sold out williamsburg, pop-up pour-over deep v kogi literally leggings VHS aesthetic. Post-ironic tattooed blue bottle lomo. Brooklyn shoreditch small batch pickled, twee truffaut banksy literally readymade direct trade ethical sriracha wayfarers.\n</p>");
-});minispade.register('app', function() {minispade.require('jquery');
+});minispade.register('templates/index', function() {Ember.TEMPLATES['index']=Ember.Handlebars.compile("<h2>Hello world from Index!!!</h2>\n<p>{{#linkTo \"about\"}}About{{/linkTo}}</p>\n<p>\n\tHoodie godard umami kogi, messenger bag aesthetic marfa shoreditch twee ethnic. Biodiesel fanny pack sriracha vinyl, cliche cardigan butcher. Master cleanse brooklyn aesthetic deep v beard. Selfies godard banksy, bushwick VHS polaroid readymade semiotics. Keytar plaid ethnic disrupt before they sold out williamsburg, pop-up pour-over deep v kogi literally leggings VHS aesthetic. Post-ironic tattooed blue bottle lomo. Brooklyn shoreditch small batch pickled, twee truffaut banksy literally readymade direct trade ethical sriracha wayfarers.\n</p>");
+});minispade.register('app', function() {/*
+	This is where we define the main dependencies via minispade
+	and create the namespace of our app so we can require only this file
+	to get all the things we need
+*
+*/
+minispade.require('jquery');
 minispade.require('handlebars');
 minispade.require('ember');
 minispade.require('ember-data');
@@ -46585,31 +46591,29 @@ App = Ember.Application.create({
 	version: '0.1.1',
 	rootElement: '#application-wrap'
 });
-
-//require('models');
-//require('views');
-//require('controllers/application_controller');
-//require('routes');
-minispade.require('test');
-test("holi!");
 });minispade.register('controllers/application_controller', function() {minispade.require("app");
 
 App.ApplicationController = Ember.Controller.extend();
 });minispade.register('routes', function() {App.Router = Ember.Router.extend({
+	// If you remove the property location, the router use the `hash` location
 	location: 'history'
 })
 
 App.Router.map(function(){
-	this.resource('dashboard');
+	/*
+	 By default (implicit behavior), you get an index resource for
+	 the route `"/"`
+	 In order to use a different resource for that route, we need to do
+	 something like this:
+	 `this.resource('my_great_resource', {path: '/'});`
+	**/
+	this.resource('about');
 });
 });minispade.register('store', function() {minispade.require('app');
 
 App.store = DS.Store.create({
   revision: 11
 });
-});minispade.register('test', function() {window.test = function(arg){
-	console.log(arg);
-}
 });minispade.register('views/application_view', function() {App.ApplicationView = Ember.View.extend({
   templateName: 'application'
 });
