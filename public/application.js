@@ -1,4 +1,4 @@
-/*!
+minispade.register('jquery', function() {/*!
  * jQuery JavaScript Library v1.9.1
  * http://jquery.com/
  *
@@ -9594,7 +9594,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
 	define( "jquery", [], function () { return jQuery; } );
 }
 
-})( window );/*
+})( window );
+});minispade.register('handlebars', function() {/*
 
 Copyright (C) 2011 by Yehuda Katz
 
@@ -11794,7 +11795,8 @@ Handlebars.VM = {
 };
 
 Handlebars.template = Handlebars.VM.template;
-;// Version: v1.0.0-rc.1
+;
+});minispade.register('ember', function() {// Version: v1.0.0-rc.1
 // Last commit: 8b061b4 (2013-02-15 12:10:22 -0800)
 
 
@@ -38632,73 +38634,8 @@ Ember
 */
 
 })();
-/*jshint evil:true*/
 
-if (typeof document !== "undefined") {
-  (function() {
-    minispade = {
-      root: null,
-      modules: {},
-      loaded: {},
-
-      globalEval: function(data) {
-        if ( data ) {
-          // We use execScript on Internet Explorer
-          // We use an anonymous function so that context is window
-          // rather than jQuery in Firefox
-          ( window.execScript || function( data ) {
-            window[ "eval" ].call( window, data );
-          } )( data );
-        }
-      },
-
-      requireModule: function(name) {
-        var loaded = minispade.loaded[name];
-        var mod = minispade.modules[name];
-
-        if (!loaded) {
-          if (mod) {
-            minispade.loaded[name] = true;
-
-            if (typeof mod === "string") {
-              this.globalEval(mod);
-            } else {
-              mod();
-            }
-          } else {
-            if (minispade.root && name.substr(0,minispade.root.length) !== minispade.root) {
-              return minispade.requireModule(minispade.root+name);
-            } else {
-              throw "The module '" + name + "' could not be found";
-            }
-          }
-        }
-
-        return loaded;
-      },
-
-      requireAll: function(regex) {
-        for (var module in this.modules) {
-          if (!this.modules.hasOwnProperty(module)) { continue; }
-          if (regex && !regex.test(module)) { continue; }
-          minispade.requireModule(module);
-        }
-      },
-
-      require: function(path) {
-        if (typeof path === 'string') {
-          minispade.requireModule(path);
-        } else {
-          minispade.requireAll(path);
-        }
-      },
-
-      register: function(name, callback) {
-        minispade.modules[name] = callback;
-      }
-    };
-  })();
-}// Last commit: 36d3f1b (2013-02-27 21:28:39 -0800)
+});minispade.register('ember-data', function() {// Last commit: 36d3f1b (2013-02-27 21:28:39 -0800)
 
 
 (function() {
@@ -46635,7 +46572,16 @@ DS.RESTAdapter = DS.Adapter.extend({
 
 })();
 
-minispade.register('app', function() {App = Ember.Application.create({
+
+});minispade.register('templates/application', function() {Ember.TEMPLATES['application']=Ember.Handlebars.compile("");
+});minispade.register('templates/dashboard', function() {Ember.TEMPLATES['dashboard']=Ember.Handlebars.compile("<h1>Dashboard</h1>");
+});minispade.register('templates/index', function() {Ember.TEMPLATES['index']=Ember.Handlebars.compile("<h2>Hello world from Index!!!</h2>\n<h2>{{#linkTo \"dashboard\"}}Dashboard{{/linkTo}}</h2>\n<p>\n\tHoodie godard umami kogi, messenger bag aesthetic marfa shoreditch twee ethnic. Biodiesel fanny pack sriracha vinyl, cliche cardigan butcher. Master cleanse brooklyn aesthetic deep v beard. Selfies godard banksy, bushwick VHS polaroid readymade semiotics. Keytar plaid ethnic disrupt before they sold out williamsburg, pop-up pour-over deep v kogi literally leggings VHS aesthetic. Post-ironic tattooed blue bottle lomo. Brooklyn shoreditch small batch pickled, twee truffaut banksy literally readymade direct trade ethical sriracha wayfarers.\n</p>");
+});minispade.register('app', function() {minispade.require('jquery');
+minispade.require('handlebars');
+minispade.require('ember');
+minispade.require('ember-data');
+
+App = Ember.Application.create({
 	version: '0.1.1',
 	rootElement: '#application-wrap'
 });
@@ -46656,7 +46602,9 @@ App.ApplicationController = Ember.Controller.extend();
 App.Router.map(function(){
 	this.resource('dashboard');
 });
-});minispade.register('store', function() {App.store = DS.Store.create({
+});minispade.register('store', function() {minispade.require('app');
+
+App.store = DS.Store.create({
   revision: 11
 });
 });minispade.register('test', function() {window.test = function(arg){
@@ -46665,4 +46613,4 @@ App.Router.map(function(){
 });minispade.register('views/application_view', function() {App.ApplicationView = Ember.View.extend({
   templateName: 'application'
 });
-});Ember.TEMPLATES['application']=Ember.Handlebars.compile("");Ember.TEMPLATES['dashboard']=Ember.Handlebars.compile("<h1>Dashboard</h1>");Ember.TEMPLATES['index']=Ember.Handlebars.compile("<h2>Hello world from Index!!!</h2>\n<h2>{{#linkTo \"dashboard\"}}Dashboard{{/linkTo}}</h2>\n<p>\n\tHoodie godard umami kogi, messenger bag aesthetic marfa shoreditch twee ethnic. Biodiesel fanny pack sriracha vinyl, cliche cardigan butcher. Master cleanse brooklyn aesthetic deep v beard. Selfies godard banksy, bushwick VHS polaroid readymade semiotics. Keytar plaid ethnic disrupt before they sold out williamsburg, pop-up pour-over deep v kogi literally leggings VHS aesthetic. Post-ironic tattooed blue bottle lomo. Brooklyn shoreditch small batch pickled, twee truffaut banksy literally readymade direct trade ethical sriracha wayfarers.\n</p>");
+});

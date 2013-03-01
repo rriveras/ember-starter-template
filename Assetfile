@@ -19,7 +19,7 @@ input "assets/javascripts" do
 
   match "app/templates/**/*.hbs" do
     handlebars
-    concat "application.js"
+    #concat "application.js"
   end
 
   match "app/**/*.js" do
@@ -30,12 +30,14 @@ input "assets/javascripts" do
   end
 
   match "vendor/**/*.js" do
+    minispade :rewrite_requires => true, :module_id_generator => proc { |input|
+        input.path.sub(/^vendor\//, '').sub(/\.js$/, '')
+    }
     uglify if production?
     concat %w[
       vendor/jquery.js
       vendor/handlebars.js
       vendor/ember.js
-      vendor/minispade.js
     ], "application.js"
   end
 end
