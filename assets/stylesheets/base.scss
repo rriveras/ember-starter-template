@@ -18,3 +18,12 @@ h1 {
 .container {
 	@include outer-container;
 }
+
+header {
+	background-color: #333;
+	color: #ddd;
+}
+
+footer {
+	background-color: #e6e6e6;
+}
