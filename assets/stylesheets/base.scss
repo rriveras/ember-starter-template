@@ -1,7 +1,6 @@
-@import "bourbon/bourbon";
-@import "neat/neat";
-
-@import "normalize";
+@import "libs/bourbon/bourbon";
+@import "libs/neat/neat";
+@import "libs/normalize";
 
 body {
 	font-family: $helvetica;

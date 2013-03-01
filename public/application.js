@@ -46576,11 +46576,10 @@ DS.RESTAdapter = DS.Adapter.extend({
 });minispade.register('templates/about', function() {Ember.TEMPLATES['about']=Ember.Handlebars.compile("<h1>About. A cool static view!</h1>\n\n<p>\n\tJust testing that all dependencies load, and the routes are working right!\n</p>");
 });minispade.register('templates/application', function() {Ember.TEMPLATES['application']=Ember.Handlebars.compile("");
 });minispade.register('templates/index', function() {Ember.TEMPLATES['index']=Ember.Handlebars.compile("<h2>Hello world from Index!!!</h2>\n<p>{{#linkTo \"about\"}}About{{/linkTo}}</p>\n<p>\n\tHoodie godard umami kogi, messenger bag aesthetic marfa shoreditch twee ethnic. Biodiesel fanny pack sriracha vinyl, cliche cardigan butcher. Master cleanse brooklyn aesthetic deep v beard. Selfies godard banksy, bushwick VHS polaroid readymade semiotics. Keytar plaid ethnic disrupt before they sold out williamsburg, pop-up pour-over deep v kogi literally leggings VHS aesthetic. Post-ironic tattooed blue bottle lomo. Brooklyn shoreditch small batch pickled, twee truffaut banksy literally readymade direct trade ethical sriracha wayfarers.\n</p>");
-});minispade.register('app', function() {/*
+});minispade.register('app', function() {/**
 	This is where we define the main dependencies via minispade
 	and create the namespace of our app so we can require only this file
 	to get all the things we need
-*
 */
 minispade.require('jquery');
 minispade.require('handlebars');
