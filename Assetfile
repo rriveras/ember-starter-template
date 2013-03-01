@@ -3,6 +3,8 @@ require "rake-pipeline-web-filters/helpers"
 require "rake-pipeline-web-filters/neuter_filter"
 
 class Rake::Pipeline::DSL::PipelineDSL
+  # We need this to switch easily between environments and 
+  # changing the rules we apply in the assets
   def production?
     ENV['RAKEP_MODE'] == 'production'
   end
@@ -12,19 +14,20 @@ output "public"
 
 input "assets/javascripts" do
 
-  #match "app/**/*.coffee" do
-  #  coffee_script
-  #end
-
+  # We take care of the handlebars templates and precompile all
   match "app/templates/**/*.hbs" do
     handlebars
-    #concat "application.js"
   end
 
   match "app/**/*.js" do
+    # minispade method to make a closure of every js file
+    # Besides that, we cut off the extra path, so we can invoke the module more easily.
+    # ==== Example
+    # `require('jquery');`
     minispade :rewrite_requires => true, :module_id_generator => proc { |input|
         input.path.sub(/^app\//, '').sub(/\.js$/, '')
     }
+    uglify if production?
     concat "application.js"
   end
 
