@@ -11,6 +11,7 @@
 
 ## Usage
 * `clone` this repo
-* Run `bundle` in the root of the app
-* `bundle exec rackup`
-* In your browser got to `http://localhost:9292`
+* Create a gemset. The repo include an `.rvmc` with a gemset `1.9.3@starter` so, you can use that (`rvm use 1.9.3@starter --create`), or change it for something that suit your needs.
+* Run `bundle` in the root of this cloned repo
+* Run `bundle exec rackup` to start the server
+* Go to `http://localhost:9292`
