@@ -1,5 +1,3 @@
-# Readme
-
 ## What's in the package
 * jquery 1.9.1
 * handlebars 1.0.0-rc.3
