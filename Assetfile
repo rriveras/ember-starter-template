@@ -18,7 +18,15 @@ input "assets/javascripts" do
 
   # We take care of the handlebars templates and precompile all
   match "app/templates/**/*.hbs" do
-    handlebars
+    handlebars  :key_name_proc => proc { |input|
+      templates_path = 'app/templates/'
+
+      if input.path.start_with?(templates_path)
+        input.path.chomp(File.extname(input.path)).gsub(/#{templates_path}/, '')
+      else
+        File.basename(input.path, File.extname(input.path))
+      end
+    }
   end
 
   match "app/**/*.js" do
